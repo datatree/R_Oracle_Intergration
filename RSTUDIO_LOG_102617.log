@@ -1,0 +1,444 @@
+
+R version 3.3.1 (2016-06-21) -- "Bug in Your Hair"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Workspace loaded from ~/.RData]
+
+Loading required package: ROracle
+Loading required package: DBI
+> library('ROracle')
+> library('DBI')
+> drv <- dbDriver("Oracle")
+> 
+> 
+> ptm <- proc.time()
+> con <- dbConnect(drv, "searstgi_admin", "tgi5933", dbname='//localhost:1521/pdt16tst', prefetch = FALSE, bulk_read = 1000L, bulk_write = 1000L, stmt_cache = 0L,external_credentials = FALSE, sysdba = FALSE)
+> proc.time() - ptm
+   user  system elapsed 
+   0.03    0.04    0.79 
+> 
+> 
+> insertString <- "INSERT INTO  FLASHBACK_STAT VALUES (:1, :2, :3, :4, :5, :6, :7)";
+> FBDB_SU  <- " FLASHBACK_DATABASE_SEQ.NEXTVAL ";
+> BEGIN_TIME   <- "TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS') ";
+> END_TIME  <- "TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS') ";
+> 
+> FLASHBACK_DATA_MB  <-  "TO_NUMBER('36.3678', '9999D99999')  ";
+> DB_DATA_MB  <-  "TO_NUMBER('147.91229', '9999D99999')";
+> REDO_DATA_MB   <-  "TO_NUMBER('31.2487', '9999D99999') ";
+> ESTIMATED_FLASHBACK_SIZE_MB  <-  "TO_NUMBER('4682.69347', '9999D99999')" ;
+> 
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+Error in .oci.GetQuery(conn, statement, data = data, prefetch = prefetch,  : 
+  ORA-01722: invalid number
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> FBDB_SU  <-"FLASHBACK_DATABASE_SEQ.NEXTVAL ";
+> BEGIN_TIME   <- "TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')";
+> END_TIME  <- "TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')";
+> 
+> FLASHBACK_DATA_MB  <- 36.3678;
+> DB_DATA_MB  <- 147.91229;
+> REDO_DATA_MB   <- 31.2487;
+> ESTIMATED_FLASHBACK_SIZE_MB  <- 4682.69347 ;
+> 
+> 
+> FBDB_SU  <-"FLASHBACK_DATABASE_SEQ.NEXTVAL ";
+> BEGIN_TIME   <- "TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')";
+> END_TIME  <- "TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')";
+> 
+> FLASHBACK_DATA_MB  <- 36.3678;
+> DB_DATA_MB  <- 147.91229;
+> REDO_DATA_MB   <- 31.2487;
+> ESTIMATED_FLASHBACK_SIZE_MB  <- 4682.69347 ;
+> 
+> 
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+Error in .oci.GetQuery(conn, statement, data = data, prefetch = prefetch,  : 
+  ORA-01722: invalid number
+> 
+> FBDB_SU  <-FLASHBACK_DATABASE_SEQ.NEXTVAL ;
+Error: object 'FLASHBACK_DATABASE_SEQ.NEXTVAL' not found
+> BEGIN_TIME   <- TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS');
+Error: could not find function "TO_DATE"
+> END_TIME  <- TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS');
+Error: could not find function "TO_DATE"
+> 
+> 
+> 
+> 
+> 
+> insertString <- "INSERT INTO FLASHBACK_STAT2 (FBDB_SU2, BEGIN_TIME2, END_TIME2, FLASHBACK_DATA_MB2, DB_DATA_MB2, REDO_DATA_MB2 ESTIMATED_FLASHBACK_SIZE_MB) VALUES (:1, :2, :3, :4, :5, :6, :7)";
+> 
+> 
+> FBDB_SU  <-"FLASHBACK_DATABASE_SEQ.NEXTVAL ";
+> BEGIN_TIME   <- "TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')";
+> END_TIME  <- "TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')";
+> 
+> FLASHBACK_DATA_MB  <- 36.3678;
+> DB_DATA_MB  <- 147.91229;
+> REDO_DATA_MB   <- 31.2487;
+> ESTIMATED_FLASHBACK_SIZE_MB  <- 4682.69347 ;
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB ESTIMATED_FLASHBACK_SIZE_MB));
+Error: unexpected symbol in "dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB ESTIMATED_FLASHBACK_SIZE_MB"
+> 
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+Error in .oci.GetQuery(conn, statement, data = data, prefetch = prefetch,  : 
+  ORA-00917: missing comma
+> insertString <- "INSERT INTO FLASHBACK_STAT2 (FBDB_SU2, BEGIN_TIME2, END_TIME2, FLASHBACK_DATA_MB2, DB_DATA_MB2, REDO_DATA_MB2, ESTIMATED_FLASHBACK_SIZE_MB) VALUES (:1, :2, :3, :4, :5, :6, :7)";
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+Error in .oci.GetQuery(conn, statement, data = data, prefetch = prefetch,  : 
+  ORA-12899: value too large for column "SEARSTGI_ADMIN"."FLASHBACK_STAT2"."FBDB_SU2" (actual: 31, maximum: 25)
+> 
+> 
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+Error in .oci.GetQuery(conn, statement, data = data, prefetch = prefetch,  : 
+  ORA-12899: value too large for column "SEARSTGI_ADMIN"."FLASHBACK_STAT2"."BEGIN_TIME2" (actual: 57, maximum: 40)
+> 
+> 
+> 
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+[1] TRUE
+> 
+> dbSendQuery (con, "COMMIT")
+Statement:            COMMIT 
+Rows affected:        0 
+Row count:            0 
+Select statement:     FALSE 
+Statement completed:  TRUE 
+OCI prefetch:         FALSE 
+Bulk read:            1000 
+Bulk write:           1000 
+> 
+> 
+> dbSendQuery (con, "SELECT * FROM   SEARSTGI_ADMIN.FLASHBACK_STAT2 WHERE FBDB_SU2 IS NOT NULL;")
+Error in .oci.SendQuery(conn, statement, data = data, prefetch = prefetch,  : 
+  ORA-00933: SQL command not properly ended
+> 
+> dbSendQuery (con, "SELECT * FROM   SEARSTGI_ADMIN.FLASHBACK_STAT2 WHERE FBDB_SU2 IS NOT NULL")
+Statement:            SELECT * FROM   SEARSTGI_ADMIN.FLASHBACK_STAT2 WHERE FBDB_SU2 IS NOT NULL 
+Rows affected:        0 
+Row count:            0 
+Select statement:     TRUE 
+Statement completed:  FALSE 
+OCI prefetch:         FALSE 
+Bulk read:            1000 
+Bulk write:           1000 
+> 
+> 
+> 
+> 
+> 
+> dbGetQuery (con, "SELECT * FROM   SEARSTGI_ADMIN.FLASHBACK_STAT2 WHERE FBDB_SU2 IS NOT NULL")
+  FBDB_SU                        FBDB_SU2 BEGIN_TIME
+1     474 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+                                                BEGIN_TIME2 END_TIME
+1 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+                                                  END_TIME2 FLASHBACK_DATA_MB
+1 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+       FLASHBACK_DATA_MB2 DB_DATA_MB             DB_DATA_MB2 REDO_DATA_MB
+1 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+            REDO_DATA_MB2 ESTIMATED_FLASHBACK_SIZE_MB ESTIMATED_FLASHBACK_SIZE_MB2
+1 3.1248699999999999E+001                    4682.693                         <NA>
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> insertString <- "INSERT INTO FLASHBACK_STAT2 (FBDB_SU2, BEGIN_TIME2, END_TIME2, FLASHBACK_DATA_MB2, DB_DATA_MB2, REDO_DATA_MB2, ESTIMATED_FLASHBACK_SIZE_MB2) VALUES (:1, :2, :3, :4, :5, :6, :7)";
+> 
+> FBDB_SU  <-"FLASHBACK_DATABASE_SEQ.NEXTVAL ";
+> BEGIN_TIME   <- "TO_DATE('27-OCT-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')";
+> END_TIME  <- "TO_DATE('27-OCT-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')";
+> 
+> FLASHBACK_DATA_MB  <- 36.3678;
+> DB_DATA_MB  <- 147.91229;
+> REDO_DATA_MB   <- 31.2487;
+> ESTIMATED_FLASHBACK_SIZE_MB  <- 4682.69347 ;
+> 
+> 
+> 
+> dbGetQuery(con, insertString, data.frame(FBDB_SU, BEGIN_TIME, END_TIME, FLASHBACK_DATA_MB, DB_DATA_MB, REDO_DATA_MB, ESTIMATED_FLASHBACK_SIZE_MB));
+[1] TRUE
+> 
+> dbGetQuery (con, "SELECT * FROM   SEARSTGI_ADMIN.FLASHBACK_STAT2 WHERE FBDB_SU2 IS NOT NULL")
+  FBDB_SU                        FBDB_SU2 BEGIN_TIME
+1     474 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+2     475 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+                                                BEGIN_TIME2 END_TIME
+1 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+2 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+                                                  END_TIME2 FLASHBACK_DATA_MB
+1 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+2 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+       FLASHBACK_DATA_MB2 DB_DATA_MB             DB_DATA_MB2 REDO_DATA_MB
+1 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+2 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+            REDO_DATA_MB2 ESTIMATED_FLASHBACK_SIZE_MB ESTIMATED_FLASHBACK_SIZE_MB2
+1 3.1248699999999999E+001                    4682.693                         <NA>
+2 3.1248699999999999E+001                          NA      4.6826934700000002E+003
+> 
+> 
+> dbSendQuery (con, "COMMIT")
+Statement:            COMMIT 
+Rows affected:        0 
+Row count:            0 
+Select statement:     FALSE 
+Statement completed:  TRUE 
+OCI prefetch:         FALSE 
+Bulk read:            1000 
+Bulk write:           1000 
+> 
+> dbGetQuery (con, "SELECT * FROM   SEARSTGI_ADMIN.FLASHBACK_STAT2 WHERE FBDB_SU2 IS NOT NULL")
+  FBDB_SU                        FBDB_SU2 BEGIN_TIME
+1     474 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+2     475 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+                                                BEGIN_TIME2 END_TIME
+1 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+2 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+                                                  END_TIME2 FLASHBACK_DATA_MB
+1 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+2 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+       FLASHBACK_DATA_MB2 DB_DATA_MB             DB_DATA_MB2 REDO_DATA_MB
+1 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+2 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+            REDO_DATA_MB2 ESTIMATED_FLASHBACK_SIZE_MB ESTIMATED_FLASHBACK_SIZE_MB2
+1 3.1248699999999999E+001                    4682.693                         <NA>
+2 3.1248699999999999E+001                          NA      4.6826934700000002E+003
+> 
+> 
+> 
+> rs2 <- dbSendQuery (con, "SELECT * FROM FLASHBACK_STAT")
+> fetch(rs2)
+   FBDB_SU          BEGIN_TIME            END_TIME FLASHBACK_DATA_MB   DB_DATA_MB
+1      231 2017-05-23 14:57:06 2017-05-23 15:48:26         19.015625   72.4843750
+2      232 2017-05-22 20:22:55 2017-05-23 14:57:06         58.492188   15.1015625
+3      233 2017-05-22 15:30:53 2017-05-22 20:22:55         12.609375   13.3671875
+4      234 2017-05-22 14:30:49 2017-05-22 15:30:53          9.164062   14.0703125
+5      235 2017-05-21 22:21:04 2017-05-22 14:30:49          7.945312   21.7656250
+6      236 2017-05-21 20:48:37 2017-05-21 22:21:04         41.820312   28.8359375
+7      237 2017-05-21 19:48:32 2017-05-21 20:48:37          5.359375   10.7031250
+8      238 2017-05-21 17:33:41 2017-05-21 19:48:32         20.046875   67.5234375
+9      239 2017-05-21 15:07:43 2017-05-21 17:33:41         37.140625   46.8437500
+10     240 2017-05-20 21:18:04 2017-05-21 15:07:43         29.882812    4.0781250
+11     241 2017-05-20 20:18:00 2017-05-20 21:18:04         29.984375   34.8906250
+12     242 2017-05-20 19:17:56 2017-05-20 20:18:00          8.531250   15.1406250
+13     243 2017-05-20 00:05:53 2017-05-20 19:17:56         20.703125   19.6718750
+14     244 2017-05-19 23:05:49 2017-05-20 00:05:53         34.484375   39.9296875
+15     245 2017-05-19 22:05:45 2017-05-19 23:05:49         31.562500   79.5937500
+16     246 2017-05-19 21:05:39 2017-05-19 22:05:45         53.515625   20.0468750
+17     247 2017-05-19 19:40:27 2017-05-19 21:05:39         10.968750   13.8906250
+18     248 2017-05-19 17:40:09 2017-05-19 19:40:27          9.632812    5.2031250
+19     249 2017-05-19 14:12:03 2017-05-19 17:40:09          0.968750    8.2265625
+20     250 2017-05-18 22:38:00 2017-05-19 14:12:03         25.367188   37.5156250
+21     251 2017-05-18 16:25:14 2017-05-18 22:38:00         59.265625   44.1093750
+22     252 2017-05-18 14:39:32 2017-05-18 16:25:14          1.234375    2.7031250
+23     253 2017-05-17 23:03:14 2017-05-18 14:39:32         27.656250   54.4921875
+24     254 2017-05-17 22:03:11 2017-05-17 23:03:14         32.421875   43.2656250
+25     255 2017-05-17 20:49:05 2017-05-17 22:03:11         37.515625   12.6015625
+26     331 2017-08-27 18:57:15 2017-08-27 19:07:27         29.968750   38.9375000
+27     332 2017-08-27 15:53:53 2017-08-27 18:57:15         14.554688    7.5859375
+28     333 2017-08-27 14:22:33 2017-08-27 15:53:53          7.671875   10.3671875
+29     334 2017-08-27 13:18:18 2017-08-27 14:22:33         34.625000   39.4218750
+30     335 2017-08-27 08:33:26 2017-08-27 13:18:18         18.429688   74.9531250
+31     336 2017-08-26 22:23:07 2017-08-27 08:33:26         57.625000    8.8906250
+32     337 2017-08-26 20:57:06 2017-08-26 22:23:07         12.671875   15.1406250
+33     338 2017-08-26 19:57:04 2017-08-26 20:57:06         23.273438   26.4140625
+34     339 2017-08-26 15:04:07 2017-08-26 19:57:04          1.062500    4.3906250
+35     340 2017-08-26 13:07:16 2017-08-26 15:04:07         38.179688   39.7109375
+36     341 2017-08-26 10:17:19 2017-08-26 13:07:16         11.875000   79.6015625
+37     342 2017-08-25 20:52:26 2017-08-26 10:17:19         75.062500   17.7187500
+38     343 2017-08-25 18:20:52 2017-08-25 20:52:26         12.890625   15.4609375
+39     344 2017-08-25 14:10:51 2017-08-25 18:20:52         12.992188   14.0546875
+40     345 2017-08-25 13:10:47 2017-08-25 14:10:51         16.226562   43.0859375
+41     346 2017-08-24 13:10:27 2017-08-25 13:10:47         24.656250    5.7187500
+42     347 2017-08-23 23:46:27 2017-08-24 13:10:27         10.773438   66.0000000
+43     348 2017-08-23 21:03:20 2017-08-23 23:46:27         75.195312   30.0312500
+44     349 2017-08-23 19:46:49 2017-08-23 21:03:20         11.921875    9.5468750
+45     350 2017-08-23 18:30:03 2017-08-23 19:46:49          7.265625   10.1875000
+46     351 2017-08-23 17:29:57 2017-08-23 18:30:03          7.539062    9.8984375
+47     352 2017-08-23 15:17:24 2017-08-23 17:29:57         30.468750   51.3125000
+48     353 2017-08-22 19:03:27 2017-08-23 15:17:24         22.640625    3.9218750
+49     354 2017-08-22 17:06:07 2017-08-22 19:03:27          8.492188   10.8593750
+50     355 2017-08-22 16:06:06 2017-08-22 17:06:07          8.296875   11.3515625
+51     416 2017-08-31 20:33:47 2017-08-31 21:01:28          6.617188    3.7890625
+52     417 2017-08-31 19:33:43 2017-08-31 20:33:47       3722.460938 3733.7968750
+53     418 2017-08-31 18:33:39 2017-08-31 19:33:43          7.328125    9.4687500
+54     419 2017-08-31 17:30:50 2017-08-31 18:33:39       1831.031250 1868.3750000
+55     420 2017-08-31 16:30:44 2017-08-31 17:30:50          8.203125   12.1250000
+56     421 2017-08-31 12:13:50 2017-08-31 16:30:44          7.164062    9.0703125
+57     422 2017-08-31 11:00:20 2017-08-31 12:13:50          7.320312   18.0234375
+58     423 2017-08-31 10:00:13 2017-08-31 11:00:20          9.320312    6.9453125
+59     424 2017-08-30 23:45:29 2017-08-31 10:00:13          8.718750   52.2890625
+60     425 2017-08-30 21:29:49 2017-08-30 23:45:29         83.289062   49.7734375
+61     426 2017-08-30 18:48:16 2017-08-30 21:29:49          4.593750    0.7890625
+62     427 2017-08-30 17:42:03 2017-08-30 18:48:16          1.156250    6.8984375
+63     428 2017-08-30 15:10:45 2017-08-30 17:42:03         19.617188   15.2578125
+64     429 2017-08-30 13:53:11 2017-08-30 15:10:45          9.437500   14.6015625
+65     430 2017-08-30 09:48:40 2017-08-30 13:53:11          6.148438    9.4062500
+66     431 2017-08-29 23:56:35 2017-08-30 09:48:40          9.382812   14.6406250
+67     432 2017-08-29 22:42:16 2017-08-29 23:56:35         76.320312  101.6015625
+68     433 2017-08-29 21:18:15 2017-08-29 22:42:16         44.335938   29.3359375
+69     434 2017-08-29 20:18:10 2017-08-29 21:18:15         10.539062   14.6406250
+70     435 2017-08-29 19:18:04 2017-08-29 20:18:10          7.750000   10.1171875
+71     436 2017-08-29 18:17:59 2017-08-29 19:18:04          8.070312   10.4218750
+72     437 2017-08-29 17:16:14 2017-08-29 18:17:59          9.367188   15.3437500
+73     438 2017-08-29 16:16:08 2017-08-29 17:16:14          9.945312   13.6250000
+74     439 2017-08-29 15:16:05 2017-08-29 16:16:08         21.828125   29.9843750
+75     440 2017-08-29 08:04:23 2017-08-29 15:16:05          6.414062    2.7500000
+76     451 2017-09-02 21:44:39 2017-09-02 21:51:23          0.031250    0.5781250
+77     452 2017-09-02 19:44:27 2017-09-02 21:44:39         12.320312   13.8984375
+78     453 2017-09-02 18:44:20 2017-09-02 19:44:27         30.617188   33.9062500
+79     454 2017-09-02 17:44:13 2017-09-02 18:44:20          6.523438    8.3515625
+80     455 2017-09-02 16:44:09 2017-09-02 17:44:13         21.421875   25.7578125
+81     456 2017-09-02 12:05:58 2017-09-02 16:44:09        988.507812  986.5390625
+   REDO_DATA_MB ESTIMATED_FLASHBACK_SIZE_MB
+1  2.498047e+01                      0.0000
+2  4.734473e+01                    102.5859
+3  5.645020e+00                    103.3828
+4  4.308105e+00                    103.7109
+5  3.468750e+00                    103.5234
+6  3.417871e+01                    105.9844
+7  3.576172e+00                    104.5781
+8  2.136768e+01                    104.5547
+9  3.129980e+01                    104.1328
+10 2.070361e+01                    103.0781
+11 2.244482e+01                    105.0000
+12 4.630859e+00                    103.9453
+13 1.363232e+01                    103.7578
+14 2.842236e+01                    106.4297
+15 2.420068e+01                    105.1406
+16 5.142871e+01                    103.9688
+17 6.134766e+00                    101.8594
+18 4.945801e+00                    101.6484
+19 6.015625e-01                    101.6016
+20 1.810693e+01                    102.1875
+21 5.367773e+01                    104.0391
+22 8.193359e-01                    102.5625
+23 2.154199e+01                    102.8438
+24 2.844434e+01                    104.6953
+25 3.191504e+01                    103.3828
+26 2.553760e+01                      0.0000
+27 8.201172e+00                   1988.5312
+28 3.912598e+00                   1998.5156
+29 3.185205e+01                   2003.5078
+30 1.338525e+01                   2005.8047
+31 4.837939e+01                   2021.8125
+32 7.205078e+00                   2056.2656
+33 1.786133e+01                   2061.0234
+34 6.279297e-01                   2063.7422
+35 3.150439e+01                   2082.0234
+36 1.374365e+01                   2087.7422
+37 5.845898e+01                   2098.0781
+38 6.437500e+00                   2147.6719
+39 6.614746e+00                   2157.3281
+40 9.540039e+00                   2173.8750
+41 1.652734e+01                   2177.2969
+42 7.405273e+00                   2280.7031
+43 6.256348e+01                   2343.0234
+44 6.291992e+00                   2352.4688
+45 3.723633e+00                   2358.0938
+46 3.820801e+00                   2364.0234
+47 1.792578e+01                   2368.5703
+48 1.734521e+01                   2377.9922
+49 4.106445e+00                   2481.9609
+50 3.931152e+00                   2492.1562
+51 3.757812e+00                      0.0000
+52 3.645521e+03                    510.6328
+53 3.643555e+00                    248.3672
+54 1.826130e+03                    248.6016
+55 4.765137e+00                    118.8281
+56 3.821289e+00                   1730.9531
+57 3.998535e+00                   1741.8281
+58 5.210938e+00                   1744.7578
+59 4.256836e+00                   1747.0547
+60 7.941553e+01                   1774.1016
+61 2.384277e+00                   1777.1719
+62 6.772461e-01                   1784.3906
+63 1.488623e+01                   1787.3906
+64 5.496582e+00                   1793.6250
+65 3.092773e+00                   1796.8828
+66 4.041504e+00                   1808.0859
+67 7.512061e+01                   1836.0234
+68 3.239795e+01                   1836.7266
+69 4.933594e+00                   1839.1406
+70 3.817871e+00                   1841.6719
+71 3.817871e+00                   1844.3203
+72 5.425293e+00                   1846.9688
+73 5.317383e+00                   1849.6641
+74 1.446387e+01                   1852.2422
+75 3.350586e+00                   1854.3750
+76 4.736328e-02                      0.0000
+77 5.946777e+00                    188.9297
+78 2.355176e+01                    189.1641
+79 3.062988e+00                    187.5703
+80 1.596533e+01                    187.6641
+81 2.362305e+01                    186.7031
+> 
+> 
+> 
+> dbWriteTable(con, "FLASHBACK_STAT", rs2, overwrite = FALSE, append=TRUE, row.names = F, schema="SEARSTGI_ADMIN")
+Error in (function (classes, fdef, mtable)  : 
+  unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"OraConnection", "character", "OraResult"’
+> 
+> 
+> dbWriteTable(con, "FLASHBACK_STAT", rs2, overwrite = FALSE, append=TRUE, row.names = T, schema="SEARSTGI_ADMIN")
+Error in (function (classes, fdef, mtable)  : 
+  unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"OraConnection", "character", "OraResult"’
+> 
+> 
+> rs5 <- dbSendQuery (con, "SELECT * FROM FLASHBACK_STAT2")
+> 
+> fetch(rs5)
+  FBDB_SU                        FBDB_SU2 BEGIN_TIME
+1     474 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+2     475 FLASHBACK_DATABASE_SEQ.NEXTVAL        <NA>
+                                                BEGIN_TIME2 END_TIME
+1 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+2 TO_DATE('26-AUG-2017 19:55:33', 'DD-MON-YYYY HH24:MI:SS')     <NA>
+                                                  END_TIME2 FLASHBACK_DATA_MB
+1 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+2 TO_DATE('26-AUG-2017 22:45:21', 'DD-MON-YYYY HH24:MI:SS')                NA
+       FLASHBACK_DATA_MB2 DB_DATA_MB             DB_DATA_MB2 REDO_DATA_MB
+1 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+2 3.6367800000000003E+001         NA 1.4791229000000001E+002           NA
+            REDO_DATA_MB2 ESTIMATED_FLASHBACK_SIZE_MB ESTIMATED_FLASHBACK_SIZE_MB2
+1 3.1248699999999999E+001                    4682.693                         <NA>
+2 3.1248699999999999E+001                          NA      4.6826934700000002E+003
+> 
+> 
+> 
+> dbWriteTable(con, "FLASHBACK_STAT3", rs5, overwrite = FALSE, append=TRUE, row.names = T, schema="SEARSTGI_ADMIN")
+Error in (function (classes, fdef, mtable)  : 
+  unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"OraConnection", "character", "OraResult"’
+> 
+> 
